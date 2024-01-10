@@ -7,7 +7,29 @@
       <div class="loginPicture">
         <div class="background"></div>
       </div>
-      <div class="loginArea"></div>
+      <div class="loginArea">
+        <div class="inputArea">
+          <h2>享樂酒店，誠摯歡迎</h2>
+          <h1>立即開始旅程</h1>
+          <div class="email">
+            <h3>電子信箱</h3>
+            <input />
+          </div>
+          <div class="password">
+            <h3>密碼</h3>
+            <input />
+          </div>
+          <div class="remember">
+            <div class="rememberAccount"><input type="checkbox" /><span>記住帳號</span></div>
+            <span class="forgetPassword">忘記密碼?</span>
+          </div>
+          <div class="loginButton">會員登入</div>
+          <div class="register">
+            <span class="noMember">沒有會員嗎?</span>
+            <span class="goRegister">前往註冊</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,7 +56,59 @@
       }
     }
     .loginArea {
-      @apply w-3/6;
+      background-image: url('../assets/login/line3.png');
+      @apply w-3/6 bg-black bg-no-repeat bg-top bg-contain;
+      .inputArea {
+        @apply w-[416px] h-[522px] mx-auto mt-[60px];
+        h2 {
+          @apply text-[16px] text-[#BF9D7D];
+        }
+        h1 {
+          @apply text-[48px] text-[#ffffff] mb-[20px];
+        }
+        .email {
+          h3 {
+            @apply text-[#ffffff] mb-[10px];
+          }
+          input {
+            @apply w-full h-[56px] rounded-[8px] mb-[10px] pl-[10px];
+          }
+        }
+        .password {
+          h3 {
+            @apply text-[#ffffff] mb-[10px];
+          }
+          input {
+            @apply w-full  h-[56px] rounded-[8px] mb-[10px] pl-[10px];
+          }
+        }
+        .remember {
+          @apply flex  justify-between mb-[30px];
+          .rememberAccount {
+            @apply flex items-center;
+            input {
+              @apply w-[24px] h-[24px]  bg-[#BF9D7D];
+            }
+            span {
+              @apply ml-[5px] text-[#ffffff];
+            }
+          }
+          .forgetPassword {
+            @apply text-[#BF9D7D] underline cursor-pointer;
+          }
+        }
+        .loginButton {
+          @apply h-[56px] text-[#ffffff] bg-[#BF9D7D] rounded-[8px] text-center leading-[56px] mb-[30px];
+        }
+        .register {
+          .noMember {
+            @apply text-[#ffffff];
+          }
+          .goRegister {
+            @apply text-[#BF9D7D] ml-[5px] underline cursor-pointer;
+          }
+        }
+      }
     }
   }
 }
