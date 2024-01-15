@@ -26,7 +26,7 @@
           <div class="loginButton">會員登入</div>
           <div class="register">
             <span class="noMember">沒有會員嗎?</span>
-            <span class="goRegister">前往註冊</span>
+            <span class="goRegister" @click="goRegister">前往註冊</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,13 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const goRegister = () => {
+  router.push('/register')
+}
+</script>
 
 <style lang="scss" scoped>
 .login {
@@ -86,8 +92,14 @@
           @apply flex  justify-between mb-[30px];
           .rememberAccount {
             @apply flex items-center;
-            input {
+            input[type='checkbox'] {
               @apply w-[24px] h-[24px]  bg-[#BF9D7D];
+              &:after {
+                @apply inline-block content-[''] w-[24px] h-[24px] border border-solid border-[#BF9D7D];
+                &:checked {
+                  @apply bg-[#BF9D7D] content-['✔︎'] text-[16px] text-center text-white;
+                }
+              }
             }
             span {
               @apply ml-[5px] text-[#ffffff];
