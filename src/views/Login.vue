@@ -13,17 +13,17 @@
           <h1>立即開始旅程</h1>
           <div class="email">
             <h3>電子信箱</h3>
-            <input />
+            <input v-model="mail" />
           </div>
           <div class="password">
             <h3>密碼</h3>
-            <input />
+            <input v-model="password" />
           </div>
           <div class="remember">
             <div class="rememberAccount"><input type="checkbox" /><span>記住帳號</span></div>
             <span class="forgetPassword">忘記密碼?</span>
           </div>
-          <div class="loginButton">會員登入</div>
+          <div class="loginButton" @click="login">會員登入</div>
           <div class="register">
             <span class="noMember">沒有會員嗎?</span>
             <span class="goRegister" @click="goRegister">前往註冊</span>
@@ -35,10 +35,34 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 const router = useRouter()
 const goRegister = () => {
   router.push('/register')
+}
+const mail = ref('tony@example.com')
+const password = ref('Aa112233')
+
+const login = async () => {
+  const data = {
+    email: mail.value,
+    password: password.value
+  }
+  await axios({
+    method: 'post',
+    url: 'https://hotel-api-baf5.onrender.com/api/v1/user/login',
+    data
+  })
+    .then((res) => {
+      console.log('login res', res)
+      localStorage.setItem('token', res.data.token)
+      router.push('/room')
+    })
+    .catch((err) => {
+      console.error('login err', err)
+    })
 }
 </script>
 

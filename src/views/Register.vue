@@ -91,8 +91,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import ZipCodeMap from '../utils/zipcodes'
+
+const cityList = ref()
+onMounted(() => {
+  console.log('ZipCodeMap', ZipCodeMap)
+  cityList.value = ZipCodeMap.map((item) => {
+    return item.city
+  })
+})
 const router = useRouter()
 const step = ref(1)
 const nextStep = () => {
