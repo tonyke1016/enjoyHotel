@@ -1,14 +1,24 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin'
+
 export default {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+    './node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}'
+  ],
   theme: {
+    fontFamily: {
+      sans: ['Noto Sans TC', 'sans-serif'],
+      serif: ['Noto Serif TC', 'serif']
+    },
     fontSize: {
       display: [
         '6.25rem',
         {
           lineHeight: 1.2,
           letterSpacing: '0.05em',
-          fontWeight: '700'
+          fontWeight: '700',
         }
       ],
       h1: [
@@ -93,10 +103,11 @@ export default {
       ]
     },
     screens: {
-      sm: '576px',
+      sm: '375px',
       md: '720px',
       lg: '960px',
-      xl: '1320px'
+      xl: '1320px',
+      '2xl': '1920px'
     },
     container: {
       center: true,
@@ -142,5 +153,16 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        h1: { fontSize: theme('fontSize.4xl') },
+        h2: { fontSize: theme('fontSize.3xl') },
+        h3: { fontSize: theme('fontSize.2xl') },
+        h4: { fontSize: theme('fontSize.xl') },
+        h5: { fontSize: theme('fontSize.lg') }
+      })
+    }),
+    import('flowbite/plugin')
+  ]
 }

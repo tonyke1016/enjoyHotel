@@ -17,7 +17,7 @@ const { count, doubleCount } = storeToRefs(store)
   </main>
 </template>
 <style lang="scss">
-.button {
-  @apply border p-1.5 m-2 bg-blue-500 rounded-xl;
-}
+// .button {
+//   @apply border p-1.5 m-2 bg-blue-500 rounded-xl;
+// }
 </style>
