@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import TheWelcome from '../components/TheWelcome.vue'
-import { useCounterStore } from '@/stores/counter'
-import { storeToRefs } from 'pinia'
-const store = useCounterStore()
-const { increment } = store
-const { count, doubleCount } = storeToRefs(store)
-
 import { initFlowbite } from 'flowbite'
+import { ref } from "vue";
+
+const dateValue = ref([]);
+const formatter = ref({
+  date: "DD MMM YYYY",
+  month: "MMM",
+});
 
 onMounted(() => {
     initFlowbite();
@@ -17,6 +17,11 @@ onMounted(() => {
 
 <template>
   <main>
+
+<div>
+    <vue-tailwind-datepicker :formatter="formatter" v-model="dateValue" as-single />
+  </div>
+
     <h1 class="text-sub-title">test</h1>
     <h2 class="font-serif text-primary">享樂酒店</h2>
     <h5 class="font-serif text-primary">Enjoyment Luxury Hotel</h5>
@@ -85,6 +90,14 @@ onMounted(() => {
         </span>
     </button>
 </div>
+
+<h1 class="text-system-primary-120">您的文字</h1>
+<button class="btn-secondary">123</button>
+<select name="" id="" class="">
+  <option value="">123</option>
+  <option value="">123</option>
+  <option value="">123</option>
+</select>
 
 
   </main>
