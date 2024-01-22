@@ -16,9 +16,7 @@ const goLogin = () => {
   </div>
 </template>
 <style lang="scss">
-.homePage {
-  .loginButton {
-    @apply p-4 bg-blue-500;
-  }
-}
+// .button {
+//   @apply border p-1.5 m-2 bg-blue-500 rounded-xl;
+// }
 </style>
