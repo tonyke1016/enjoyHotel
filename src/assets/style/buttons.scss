@@ -1,0 +1,12 @@
+.btn-primary {
+  @apply text-white bg-system-primary-100 inline-block rounded-lg px-8 py-4 hover:bg-system-primary-120 transition no-underline;
+}
+
+.btn-secondary {
+  @apply text-system-primary-100 bg-white inline-block rounded-lg px-8 py-4 hover:text-system-primary-120 hover:bg-system-primary-10 transition no-underline border border-system-primary-100 hover:border-system-primary-120;
+}
+
+.btn-ghost {
+  @apply text-white bg-transparent rounded-lg px-8 py-4 hover:text-system-primary-100 transition no-underline;
+}
+

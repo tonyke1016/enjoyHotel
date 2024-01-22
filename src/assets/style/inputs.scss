@@ -1,0 +1,60 @@
+.form-input{
+  @apply border-system-gray-40 text-system-gray-80 focus:shadow-[0_0_0_4px_rgba(190,156,124,0.1)] outline-none rounded-lg focus:ring-system-primary-100 focus:border-system-primary-100 focus:bg-white block w-full p-2.5
+}
+
+.form-input-error{
+  @apply border-system-error-100 text-system-gray-80 focus:shadow-[0_0_0_4px_rgba(190,156,124,0.1)] outline-none rounded-lg focus:ring-system-primary-100 focus:border-system-primary-100 focus:bg-white block w-full p-2.5
+}
+
+/* This css is for normalizing styles. You can skip this. */
+
+/* The container */
+.form-checkbox-group {
+  @apply block relative select-none cursor-pointer pl-8 pt-0.5 mb-4
+}
+
+/* Hide the browser's default checkbox */
+.form-checkbox-group input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  @apply rounded absolute left-0 top-0 h-6 w-6 bg-white
+}
+
+
+/* On mouse-over, add a grey background color */
+.form-checkbox-group:hover input ~ .checkmark {
+  @apply shadow-[0_0_0_2px_rgba(191,157,125,0.2)]
+}
+
+/* When the checkbox is checked, add a blue background */
+.form-checkbox-group input:checked ~ .checkmark {
+  @apply bg-system-primary-100
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.form-checkbox-group input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.form-checkbox-group .checkmark:after {
+  @apply w-2 h-4 top-0 left-2 border-white origin-center rotate-45 border-t-0 border-r-2 border-b-2 border-l-0
+}
+  
+.form-select{
+  @apply border-none rounded block p-2.5 w-full bg-white font-serif active:border-system-primary-100 active:border-solid focus-visible:outline-none
+}

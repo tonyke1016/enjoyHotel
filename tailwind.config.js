@@ -1,12 +1,14 @@
-/** @type {import('tailwindcss').Config} */
+import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
 
 export default {
   content: [
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
+    './node_modules/vue-tailwind-datepicker/**/*.js',
     './node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}'
   ],
+  darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     fontFamily: {
       sans: ['Noto Sans TC', 'sans-serif'],
@@ -18,7 +20,7 @@ export default {
         {
           lineHeight: 1.2,
           letterSpacing: '0.05em',
-          fontWeight: '700',
+          fontWeight: '700'
         }
       ],
       h1: [
@@ -74,7 +76,7 @@ export default {
         {
           lineHeight: 1.5,
           letterSpacing: '0.02em',
-          fontWeight: '700',
+          fontWeight: '700'
         }
       ],
       'sub-title': [
@@ -114,9 +116,11 @@ export default {
       padding: '0.75rem'
     },
     extend: {
-      colors:{
-        system:{
-          primary:{
+      colors: {
+        'vtd-primary': colors.stone, // Light mode Datepicker color
+        'vtd-secondary': colors.stone, // Dark mode Datepicker color
+        system: {
+          primary: {
             120: '#7B6651',
             100: '#BF9D7D',
             80: '#AE9984',
@@ -145,6 +149,7 @@ export default {
           background: '#140F0A',
           gray: {
             80: '#4B4B4B',
+            70:'#909090',
             60: '#ECECEC',
             40: '#ECECEC',
             10: '#F9F9F9'
@@ -156,13 +161,50 @@ export default {
   plugins: [
     plugin(function ({ addBase, theme }) {
       addBase({
-        h1: { fontSize: theme('fontSize.4xl') },
-        h2: { fontSize: theme('fontSize.3xl') },
-        h3: { fontSize: theme('fontSize.2xl') },
-        h4: { fontSize: theme('fontSize.xl') },
-        h5: { fontSize: theme('fontSize.lg') }
+        h1: {
+          fontSize: theme('fontSize.h1[0]'),
+          lineHeight: theme('fontSize.h1[1].lineHeight'),
+          letterSpacing: theme('fontSize.h1[1].letterSpacing'),
+          fontWeight: theme('fontSize.h1[1].fontWeight'),
+          fontFamily: theme('fontFamily.serif')
+        },
+        h2: {
+          fontSize: theme('fontSize.h2[0]'),
+          lineHeight: theme('fontSize.h2[1].lineHeight'),
+          letterSpacing: theme('fontSize.h2[1].letterSpacing'),
+          fontWeight: theme('fontSize.h2[1].fontWeight'),
+          fontFamily: theme('fontFamily.serif')
+        },
+        h3: {
+          fontSize: theme('fontSize.h3[0]'),
+          lineHeight: theme('fontSize.h3[1].lineHeight'),
+          letterSpacing: theme('fontSize.h3[1].letterSpacing'),
+          fontWeight: theme('fontSize.h3[1].fontWeight'),
+          fontFamily: theme('fontFamily.serif')
+        },
+        h4: {
+          fontSize: theme('fontSize.h4[0]'),
+          lineHeight: theme('fontSize.h4[1].lineHeight'),
+          letterSpacing: theme('fontSize.h4[1].letterSpacing'),
+          fontWeight: theme('fontSize.h4[1].fontWeight'),
+          fontFamily: theme('fontFamily.serif')
+        },
+        h5: {
+          fontSize: theme('fontSize.h5[0]'),
+          lineHeight: theme('fontSize.h5[1].lineHeight'),
+          letterSpacing: theme('fontSize.h5[1].letterSpacing'),
+          fontWeight: theme('fontSize.h5[1].fontWeight'),
+          fontFamily: theme('fontFamily.serif')
+        },
+        'input': {
+          border: '1px solid #ddd',
+          borderRadius: '.25rem',
+          padding: '.5rem .75rem',
+          // 其他您想添加的樣式
+        },
       })
     }),
-    import('flowbite/plugin')
+    import('flowbite/plugin'),
+    import('@tailwindcss/forms')
   ]
 }
