@@ -58,7 +58,7 @@ const login = async () => {
     .then((res) => {
       console.log('login res', res)
       localStorage.setItem('token', res.data.token)
-      router.push('/room')
+      // router.push('/rooms')
     })
     .catch((err) => {
       console.error('login err', err)

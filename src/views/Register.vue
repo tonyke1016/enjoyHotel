@@ -67,7 +67,7 @@
             <div class="address">
               <h3>地址</h3>
               <div>
-                <select name="county" class="city" v-model="chooseCounty">
+                <select name="county" class="city" v-model="chooseCounty" @change="selectCounty">
                   <option v-for="county in countyList" :key="county" :value="county">
                     {{ county }}
                   </option>
@@ -95,7 +95,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, computed, nextTick } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import ZipCodeMap from '../utils/zipcodes'
 
@@ -127,7 +127,17 @@ const countyList = ref([
 const cityList = computed(() => {
   return ZipCodeMap.filter((item) => item.county === chooseCounty.value)
 })
-const chooseCity = ref('')
+const chooseCity = ref({
+  detail: '100臺北市中正區',
+  zipcode: 100,
+  county: '臺北市',
+  city: '中正區'
+})
+
+// 選縣市
+const selectCounty = () => {
+  chooseCity.value = cityList.value[0]
+}
 
 const router = useRouter()
 const step = ref(1)
