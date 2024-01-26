@@ -10,6 +10,21 @@ const formatter = ref({
   month: 'MMM'
 })
 
+const generateYearRange = ()  =>{
+      const currentYear = new Date().getFullYear();
+      return Array.from({ length: 100 }, (_, i) => currentYear - i);
+    }
+const daysInMonth = (year, month) => {
+  return new Date(year, month, 0).getDate();
+}
+
+const selectedYear = ref(new Date().getFullYear())
+const selectedMonth= ref(new Date().getMonth() + 1)
+const selectedDay= ref(new Date().getDate())
+const years =ref(generateYearRange())
+
+
+
 onMounted(() => {
   initFlowbite()
 })
@@ -204,6 +219,20 @@ onMounted(() => {
         </div>
       </li>
     </ol>
+    ---
+    <div>
+    <select v-model="selectedYear">
+      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+    </select>
+
+    <select v-model="selectedMonth">
+      <option v-for="month in 12" :key="month" :value="month">{{ month }}</option>
+    </select>
+
+    <select v-model="selectedDay">
+      <option v-for="day in daysInMonth(selectedYear, selectedMonth)" :key="day" :value="day">{{ day }}</option>
+    </select>
+  </div>
     ---
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
       <!-- Carousel wrapper -->
