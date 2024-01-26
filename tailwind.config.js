@@ -110,7 +110,10 @@ export default {
       md: '720px',
       lg: '960px',
       xl: '1320px',
-      '2xl': '1920px'
+      '2xl': '1920px',
+      'mobile': '375px',
+      'tablet': '640px',
+      'desktop': '1920px'
     },
     container: {
       center: true,
@@ -159,6 +162,9 @@ export default {
       },
       width:{
         '773px':'773px'
+      },
+      height:{
+        '28rem':'28rem'
       },
       padding: {
         '120px': '120px',

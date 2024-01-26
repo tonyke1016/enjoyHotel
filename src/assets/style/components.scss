@@ -47,7 +47,10 @@
 }
 
 .room-carousel{
-  div div{
-    @apply rounded-tl-lg rounded-bl-lg rounded-tr-none rounded-br-none
+  div div:first-of-type{
+    @apply tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem]
+  }
+  div div img{
+    @apply tablet:h-[28rem] tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem] mobile:rounded-t-3xl mobile:h-full
   }
 }
