@@ -45,3 +45,9 @@
   height: 4px;
   width: 32px;
 }
+
+.room-carousel{
+  div div{
+    @apply rounded-tl-lg rounded-bl-lg rounded-tr-none rounded-br-none
+  }
+}

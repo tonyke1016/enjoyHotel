@@ -6,6 +6,7 @@ export default {
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
     './node_modules/vue-tailwind-datepicker/**/*.js',
+    'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',
     './node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}'
   ],
   darkMode: ['class', '[data-mode="dark"]'],
@@ -155,6 +156,13 @@ export default {
             10: '#F9F9F9'
           }
         }
+      },
+      width:{
+        '773px':'773px'
+      },
+      padding: {
+        '120px': '120px',
+        '168px': '168px',
       }
     }
   },
