@@ -67,11 +67,15 @@
             <div class="address">
               <h3>地址</h3>
               <div>
-                <select name="city" class="city">
-                  <option value="">高雄市</option>
+                <select name="county" class="city" v-model="chooseCounty">
+                  <option v-for="county in countyList" :key="county" :value="county">
+                    {{ county }}
+                  </option>
                 </select>
-                <select name="district" class="district">
-                  <option value="">新興區</option>
+                <select name="city" class="district" v-model="chooseCity">
+                  <option v-for="city in cityList" :key="city.zipcode" :value="city">
+                    {{ city.city }}
+                  </option>
                 </select>
               </div>
               <input placeholder="請輸入詳細地址" />
@@ -91,17 +95,40 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import ZipCodeMap from '../utils/zipcodes'
 
-const cityList = ref()
-onMounted(() => {
-  console.log('ZipCodeMap', ZipCodeMap)
-  cityList.value = ZipCodeMap.map((item) => {
-    return item.city
-  })
+const chooseCounty = ref('臺北市')
+const countyList = ref([
+  '臺北市',
+  '基隆市',
+  '新北市',
+  '宜蘭縣',
+  '新竹市',
+  '新竹縣',
+  '桃園市',
+  '苗栗縣',
+  '臺中市',
+  '彰化縣',
+  '南投縣',
+  '嘉義市',
+  '嘉義縣',
+  '雲林縣',
+  '臺南市',
+  '高雄市',
+  '澎湖縣',
+  '屏東縣',
+  '臺東縣',
+  '花蓮縣',
+  '金門縣',
+  '連江縣'
+])
+const cityList = computed(() => {
+  return ZipCodeMap.filter((item) => item.county === chooseCounty.value)
 })
+const chooseCity = ref('')
+
 const router = useRouter()
 const step = ref(1)
 const nextStep = () => {
