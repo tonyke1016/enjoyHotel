@@ -13,14 +13,16 @@
           <h1>立即開始旅程</h1>
           <div class="email">
             <h3>電子信箱</h3>
-            <input v-model="mail" />
+            <input v-model="mail" placeholder="hello@example.com" />
           </div>
           <div class="password">
             <h3>密碼</h3>
-            <input v-model="password" />
+            <input v-model="password" placeholder="請輸入密碼" />
           </div>
           <div class="remember">
-            <div class="rememberAccount"><input type="checkbox" /><span>記住帳號</span></div>
+            <div class="rememberAccount">
+              <input type="checkbox" v-model="rememberAccount" /><span>記住帳號</span>
+            </div>
             <span class="forgetPassword">忘記密碼?</span>
           </div>
           <div class="loginButton" @click="login">會員登入</div>
@@ -37,32 +39,37 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import api from '@/stores/api'
 import axios from 'axios'
 const router = useRouter()
 const goRegister = () => {
   router.push('/register')
 }
-const mail = ref('tony@example.com')
-const password = ref('Aa112233')
+const mail = ref(localStorage.getItem('account') || '')
+const password = ref('')
+const rememberAccount = ref(JSON.parse(localStorage.getItem('remember')) || false)
 
 const login = async () => {
-  const data = {
+  const sendObj = {
     email: mail.value,
     password: password.value
   }
-  await axios({
-    method: 'post',
-    url: 'https://hotel-api-baf5.onrender.com/api/v1/user/login',
-    data
-  })
-    .then((res) => {
-      console.log('login res', res)
-      localStorage.setItem('token', res.data.token)
-      // router.push('/rooms')
-    })
-    .catch((err) => {
-      console.error('login err', err)
-    })
+  try {
+    let res = await api.POST('user/login', sendObj)
+    // 記住帳號
+    if (rememberAccount.value === true) {
+      localStorage.setItem('account', mail.value)
+      localStorage.setItem('remember', JSON.stringify(true))
+    } else {
+      localStorage.removeItem('account')
+      localStorage.removeItem('remember')
+    }
+    console.log('res', res)
+    localStorage.setItem('token', res.token)
+    router.push('/rooms')
+  } catch (error) {
+    alert(`${error}`)
+  }
 }
 </script>
 

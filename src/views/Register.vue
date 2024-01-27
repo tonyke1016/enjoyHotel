@@ -25,15 +25,15 @@
           <div class="step1InputArea" v-show="step === 1">
             <div class="email">
               <h3>電子信箱</h3>
-              <input placeholder="hello@example.com" />
+              <input placeholder="hello@example.com" v-model="registerEmail" />
             </div>
             <div class="password">
               <h3>密碼</h3>
-              <input placeholder="請輸入密碼" />
+              <input placeholder="請輸入密碼" v-model="registerPassword" />
             </div>
             <div class="confirmPassword">
               <h3>確認密碼</h3>
-              <input placeholder="請再輸入一次密碼" />
+              <input placeholder="請再輸入一次密碼" v-model="registerConfirmPassword" />
             </div>
             <div class="nextStep" @click="nextStep">下一步</div>
             <div class="inquireLogin">
@@ -44,23 +44,29 @@
           <div class="step2InputArea" v-show="step === 2">
             <div class="name">
               <h3>姓名</h3>
-              <input placeholder="請輸入姓名" />
+              <input placeholder="請輸入姓名" v-model="registerName" />
             </div>
             <div class="phoneNumber">
               <h3>手機號碼</h3>
-              <input placeholder="請輸入手機號碼" />
+              <input placeholder="請輸入手機號碼" v-model="registerPhoneNumber" />
             </div>
             <div class="birthday">
               <h3>生日</h3>
               <div>
-                <select name="year" class="year">
-                  <option value="">2023年</option>
+                <select name="year" class="year" v-model="selectedYear">
+                  <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
                 </select>
-                <select name="month" class="month">
-                  <option value="">1月</option>
+                <select name="month" class="month" v-model="selectedMonth">
+                  <option v-for="month in 12" :key="month" :value="month">{{ month }}</option>
                 </select>
-                <select name="day" class="day">
-                  <option value="">13日</option>
+                <select name="day" class="day" v-model="selectedDay">
+                  <option
+                    v-for="day in daysInMonth(selectedYear, selectedMonth)"
+                    :key="day"
+                    :value="day"
+                  >
+                    {{ day }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -78,12 +84,14 @@
                   </option>
                 </select>
               </div>
-              <input placeholder="請輸入詳細地址" />
+              <input placeholder="請輸入詳細地址" v-model="registerAddress" />
             </div>
             <div class="norm">
-              <input type="checkbox" /><span>我已閱讀並同意本網站個資使用規範</span>
+              <input type="checkbox" v-model="regulation" /><span
+                >我已閱讀並同意本網站個資使用規範</span
+              >
             </div>
-            <div class="registerButton">完成註冊</div>
+            <div class="registerButton" @click="registerSubmit">完成註冊</div>
             <div class="login">
               <span class="hasMember">已經有會員了嗎?</span>
               <span class="goLogin" @click="goLogin">立即登入</span>
@@ -95,10 +103,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import api from '@/stores/api'
 import ZipCodeMap from '../utils/zipcodes'
 
+// 步驟1註冊資料
+const registerEmail = ref('')
+const registerPassword = ref('')
+const registerConfirmPassword = ref('')
+
+// 步驟2註冊資料
+const registerName = ref('')
+const registerPhoneNumber = ref('')
 const chooseCounty = ref('臺北市')
 const countyList = ref([
   '臺北市',
@@ -133,15 +150,75 @@ const chooseCity = ref({
   county: '臺北市',
   city: '中正區'
 })
-
-// 選縣市
+// 選縣市 預設為該縣市第一區
 const selectCounty = () => {
   chooseCity.value = cityList.value[0]
+}
+// 選出生年月日
+const generateYearRange = () => {
+  const currentYear = new Date().getFullYear()
+  return Array.from({ length: 100 }, (_, i) => currentYear - i)
+}
+const daysInMonth = (year, month) => {
+  return new Date(year, month, 0).getDate()
+}
+const selectedYear = ref(new Date().getFullYear())
+const selectedMonth = ref(new Date().getMonth() + 1)
+const selectedDay = ref(new Date().getDate())
+const years = ref(generateYearRange())
+const registerAddress = ref('')
+const regulation = ref(true)
+const registerSubmit = async () => {
+  if (
+    registerName.value === '' ||
+    registerPhoneNumber.value === '' ||
+    registerAddress.value === ''
+  ) {
+    alert('尚有必填欄位為空！！')
+    return
+  }
+  const sendObj = {
+    name: registerName.value,
+    email: registerEmail.value,
+    password: registerPassword.value,
+    phone: registerPhoneNumber.value,
+    birthday:
+      String(selectedYear.value) +
+      '/' +
+      String(selectedMonth.value) +
+      '/' +
+      String(selectedDay.value),
+    address: {
+      zipcode: chooseCity.value.zipcode,
+      detail: chooseCounty.value + chooseCity.value.city + registerAddress.value
+    }
+  }
+  console.log('提交的obj', sendObj)
+  try {
+    let res = await api.POST('user/signup', sendObj)
+    alert('您已註冊成功！！')
+    router.push('/login')
+  } catch (error) {
+    // console.log(error)
+    alert(`${error}`)
+  }
 }
 
 const router = useRouter()
 const step = ref(1)
 const nextStep = () => {
+  if (
+    registerEmail.value === '' ||
+    registerPassword.value === '' ||
+    registerConfirmPassword.value === ''
+  ) {
+    alert('尚有欄位必填！！！')
+    return
+  }
+  if (registerPassword.value !== registerConfirmPassword.value) {
+    alert('密碼與確認密碼不相符！！！')
+    return
+  }
   step.value = 2
 }
 const goLogin = () => {
