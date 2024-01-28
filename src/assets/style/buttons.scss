@@ -10,3 +10,6 @@
   @apply text-white bg-transparent rounded-lg px-8 py-4 hover:text-system-primary-100 transition no-underline;
 }
 
+.btn-circle{
+  @apply border-2 border-system-gray-40 rounded-full p-4
+}

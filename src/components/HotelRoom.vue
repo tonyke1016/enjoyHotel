@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref, defineProps, computed } from 'vue'
+import { onMounted, ref , computed } from 'vue'
 import { FwbCarousel } from 'flowbite-vue'
+import router from '@/router'
+
 const props = defineProps({
   content: { type: Object }
 })
@@ -15,16 +17,22 @@ const price = computed(() => {
   return `NT ${props.content.price.toLocaleString()}`
 })
 
-const toRoom = (id) =>{
-  console.log(id)
+const toRoom = (id: string) => {
+  router.push({
+    name: 'room',
+    params: { id }
+  })
 }
+
 onMounted(() => {
   console.log(props.content.imageUrlList)
 })
 </script>
 
 <template>
-  <div class="flex bg-white rounded-tr-lg rounded-br-lg ml-auto mr-auto max-w-7xl mobile:flex-col tablet:flex-col lg:flex-row">
+  <div
+    class="flex bg-white rounded-tr-lg rounded-br-lg ml-auto mr-auto max-w-7xl mobile:flex-col tablet:flex-col lg:flex-row"
+  >
     <div class="mobile:w-full lg:w-[773px] room-carousel">
       <FwbCarousel :pictures="pictures" />
     </div>
@@ -58,29 +66,29 @@ onMounted(() => {
       <div class="bg-gradient-to-r from-system-primary-100 h-0.5 mb-10"></div>
       <div class="flex justify-between">
         <h5 class="text-system-primary-100">
-        {{ price }}
-      </h5>
-       <div @click="toRoom(props.content._id)" class="cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <g clip-path="url(#clip0_8091_4115)">
-            <path
-              d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
-              fill="#BF9D7D"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_8091_4115">
-              <rect width="24" height="24" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-       </div>
+          {{ price }}
+        </h5>
+        <div @click="toRoom(props.content._id)" class="cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_8091_4115)">
+              <path
+                d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
+                fill="#BF9D7D"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_8091_4115">
+                <rect width="24" height="24" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
       </div>
     </div>
   </div>

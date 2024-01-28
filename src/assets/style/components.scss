@@ -1,43 +1,44 @@
-.stepper-group{
-  @apply flex items-center w-full my-4 mx-2
+.stepper-group {
+  @apply flex items-center w-full my-4 mx-2;
 }
-.stepper-line-basic{
-  @apply flex w-full items-center
+.stepper-line-basic {
+  @apply flex w-full items-center;
 }
-.stepper-line-bright{
-  @apply text-system-primary-100  after:content-[''] after:w-3/4 after:h-1 after:border-b after:border-white after:mt-4 after:border-4 after:inline-block after:mx-auto
+.stepper-line-bright {
+  @apply text-system-primary-100  after:content-[''] after:w-3/4 after:h-1 after:border-b after:border-white after:mt-4 after:border-4 after:inline-block after:mx-auto;
 }
-.stepper-line-dark{
-  @apply text-system-primary-100  after:content-[''] after:w-3/4 after:h-1 after:border-b after:border-system-gray-70 after:mt-4 after:border-4 after:inline-block after:mx-auto
+.stepper-line-dark {
+  @apply text-system-primary-100  after:content-[''] after:w-3/4 after:h-1 after:border-b after:border-system-gray-70 after:mt-4 after:border-4 after:inline-block after:mx-auto;
 }
-.stepper-number-basic{
-  @apply flex flex-col items-center text-h6 font-serif
+.stepper-number-basic {
+  @apply flex flex-col items-center text-h6 font-serif;
 }
-.stepper-number-bright{
-  @apply flex items-center justify-center w-10 h-10 bg-system-primary-100 rounded-full lg:h-8 lg:w-8 text-white font-serif text-h6 shrink-0 
+.stepper-number-bright {
+  @apply flex items-center justify-center w-10 h-10 bg-system-primary-100 rounded-full lg:h-8 lg:w-8 text-white font-serif text-h6 shrink-0;
 }
-.stepper-number-dark{
-  @apply flex items-center justify-center w-10 h-10 bg-transparent rounded-full border-solid border-2 border-system-gray-70 lg:h-8 lg:w-8 text-system-gray-70 font-serif text-h6 shrink-0 
+.stepper-number-dark {
+  @apply flex items-center justify-center w-10 h-10 bg-transparent rounded-full border-solid border-2 border-system-gray-70 lg:h-8 lg:w-8 text-system-gray-70 font-serif text-h6 shrink-0;
 }
-.stepper-title-bright{
-  @apply text-center mt-2 text-white
-}
-
-.stepper-title-dark{
-  @apply text-center mt-2 text-system-gray-70
+.stepper-title-bright {
+  @apply text-center mt-2 text-white;
 }
 
-.tab-active{
-  @apply inline-block p-4 border-b-2 border-transparent font-semibold rounded-t-lg font-serif text-system-primary-100 hover:text-system-primary-100 hover:bg-transparent relative 
-}
-.tab-base{
-  @apply inline-block p-4 border-b-2 border-transparent font-semibold rounded-t-lg font-serif text-white hover:text-system-primary-100 hover:bg-transparent relative 
+.stepper-title-dark {
+  @apply text-center mt-2 text-system-gray-70;
 }
 
-.tab-base:hover::after ,.tab-active::after {
-  content: "";
+.tab-active {
+  @apply inline-block p-4 border-b-2 border-transparent font-semibold rounded-t-lg font-serif text-system-primary-100 hover:text-system-primary-100 hover:bg-transparent relative;
+}
+.tab-base {
+  @apply inline-block p-4 border-b-2 border-transparent font-semibold rounded-t-lg font-serif text-white hover:text-system-primary-100 hover:bg-transparent relative;
+}
+
+.tab-base:hover::after,
+.tab-active::after {
+  content: '';
   display: block;
-  background: #BF9D7D;
+  background: #bf9d7d;
   position: absolute;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   bottom: 0;
@@ -46,11 +47,76 @@
   width: 32px;
 }
 
-.room-carousel{
-  div div:first-of-type{
-    @apply tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem]
+//更改輪播套件樣式
+
+.room-carousel {
+  div div:first-of-type {
+    @apply tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem];
   }
-  div div img{
-    @apply tablet:h-[28rem] tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem] mobile:rounded-t-3xl mobile:h-full
+  div div img {
+    @apply tablet:h-[28rem] tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem] mobile:rounded-t-3xl mobile:h-full;
   }
+}
+
+.show-datepicker{
+  @apply bg-white
+}
+
+//更改月曆套件樣式
+
+.vue-datepicker {
+  .bg-white.rounded-lg.shadow-sm{
+    @apply border-none
+  }
+  .h-full.absolute{
+    div{
+      @apply border-none
+    }
+  }
+  .relative.w-full.overflow-hidden.mt-3.sm:mt-0.sm:ml-2{
+    @apply hidden
+  }
+  .vtd-datepicker-date.relative.flex.justify-center.items-center.text-white {
+    @apply rounded-full hover:rounded-full bg-black;
+  }
+
+  .relative.w-full.mb-3 .flex.justify-between.items-center {
+    .flex-shrink-0:nth-last-of-type(1) .inline-flex button {
+      @apply hidden;
+    }
+    .flex.flex-1 {
+      @apply flex-row-reverse;
+    }
+    .flex.flex-1:first-of-type button:after{
+      content:'月'
+    }
+
+    .flex.flex-1:nth-last-of-type(1) button:after{
+      content:'年'
+    }
+  }
+
+  .relative.w-full.mt-3 .flex.justify-between.items-center:first-of-type {
+    .flex-shrink-0:first-of-type .inline-flex button {
+      @apply hidden;
+    }
+  }
+  >.flex div{
+    @apply shadow-none border-none
+  }
+  .flex.flex-1 {
+    @apply flex-row-reverse;
+  }
+
+  .flex.flex-1:first-of-type button:after{
+    content:'月'
+  }
+
+  .flex.flex-1:nth-last-of-type(1) button:after{
+    content:'年'
+  }
+}
+
+.overlay{
+  @apply bg-black fixed inset-0 bg-black bg-opacity-50 z-0
 }

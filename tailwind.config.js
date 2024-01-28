@@ -169,6 +169,9 @@ export default {
       padding: {
         '120px': '120px',
         '168px': '168px',
+      },
+      margin: {
+        '72px': '72px',
       }
     }
   },
