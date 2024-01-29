@@ -33,7 +33,7 @@ onMounted(() => {
   <div
     class="flex bg-white rounded-tr-lg rounded-br-lg ml-auto mr-auto max-w-7xl mobile:flex-col tablet:flex-col lg:flex-row"
   >
-    <div class="mobile:w-full lg:w-[773px] room-carousel">
+    <div class="mobile:w-full lg:w-[773px] room-carousel primary-carousel">
       <FwbCarousel :pictures="pictures" />
     </div>
     <div class="flex flex-col tablet:p-10 mobile:p-4">
