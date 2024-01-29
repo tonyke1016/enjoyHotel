@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import { useRoomStore } from '@/stores/roomStore'
-import RoomDatePicker from '@/components/Room/RoomDatePicker.vue'
-import { ref, onMounted, computed } from 'vue'
+import BookRoomForm from '@/components/Room/BookRoomForm.vue'
+import BookRoomFormMobile from '@/components/Room/BookRoomFormMobile.vue'
+import { FwbCarousel } from 'flowbite-vue'
+import { ref, onMounted,computed } from 'vue'
 import { initFlowbite } from 'flowbite'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const roomStore = useRoomStore()
 const dataLoading = ref(false)
-
-const peopleNum = ref(1)
 const room = ref({})
 
 const loadData = async () => {
   await roomStore.fetchRoom(route.params.id)
   room.value = roomStore.getRoom
-  console.log(room.value)
   dataLoading.value = true
 }
 
-const price = computed(() => {
-  return `NT ${room.value.price.toLocaleString()}`
+const pictures = computed(() => {
+  return room.value.imageUrlList.map((image, index) => {
+    return { src: image, alt: `Image ${index}` }
+  })
 })
 
 onMounted(() => {
@@ -30,8 +31,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="bg-system-primary-10 p-20" v-if="dataLoading">
-    <div class="grid grid-cols-4 grid-rows-2 gap-4">
+  <main class="bg-system-primary-10 lg:p-10 xl:p-20" v-if="dataLoading">
+    <div class="mobile:w-full mobile:block lg:hidden primary-carousel z-10">
+      <FwbCarousel :pictures="pictures" no-controls />
+    </div>
+    <div class="lg:grid grid-cols-4 grid-rows-2 gap-4 tablet:hidden mobile:hidden">
       <div class="col-span-2 row-span-2">
         <img class="rounded-lg" :src="room.imageUrl" alt="" srcset="" />
       </div>
@@ -39,8 +43,8 @@ onMounted(() => {
         <img class="rounded-lg" :src="img" alt="" srcset="" :key="index" />
       </div>
     </div>
-    <div class="pt-[120px] pb-[168px] grid grid-cols-8 gap-4">
-      <div class="tablet:col-start-2 tablet:col-span-4 mobile:col-span-6 mr-[72px]">
+    <div class="tablet:pt-10 mobile:pt-10 lg:pt-[120px] lg:pb-[168px] grid grid-cols-8 gap-4">
+      <div class="xl:col-start-2 lg:col-span-4 tablet:col-span-8 mobile:col-span-8 lg:mr-[72px] tablet:px-4 mobile:px-4">
         <div class="mb-20">
           <h1 class="tablet:mb-4 mobile:mb-4">{{ room.name }}</h1>
           <span class="font-serif font-bold">{{ room.description }}</span>
@@ -140,50 +144,8 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="tablet:col-span-2 mobile:col-span-6">
-        <div class="rounded-2xl bg-white font-serif p-10 flex flex-col">
-          <h5 class="border-b-2 border-system-gray-40 pb-4 mb-10">預訂房型</h5>
-          <h2 class="mb-2">{{ room.name }}</h2>
-          <span class="mb-10">
-            {{ room.description }}
-          </span>
-          <RoomDatePicker/>
-          <div class="mb-10 flex justify-between items-center">
-            <span>人數</span>
-            <div>
-              <button class="btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path d="M19 13H5V11H19V13Z" fill="black" />
-                </svg>
-              </button>
-              <span class="text-h6 mr-6 ml-6">
-                {{ peopleNum }}
-              </span>
-              <button class="btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="black" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <h5 class="text-system-primary-100 mb-10">
-            {{ price }}
-          </h5>
-          <button class="btn-primary">立即預訂</button>
-        </div>
-      </div>
+      <BookRoomForm :room="room"/>
+      <BookRoomFormMobile :room="room" />
     </div>
     <div></div>
   </main>

@@ -49,6 +49,18 @@
 
 //更改輪播套件樣式
 
+.primary-carousel {
+  .relative .flex.absolute.bottom-5.z-30.space-x-3 button{
+    @apply rounded-none h-1
+  }
+  .relative .flex.absolute.bottom-5.z-30.space-x-3 button.bg-white.bg-white\/50 {
+  @apply bg-system-primary-40 w-8
+  }
+  .relative .flex.absolute.bottom-5.z-30.space-x-3 button.bg-white {
+  @apply bg-system-primary-100 w-12
+  }
+}
+
 .room-carousel {
   div div:first-of-type {
     @apply tablet:rounded-tl-lg tablet:rounded-bl-lg tablet:rounded-tr-none tablet:rounded-br-none tablet:h-[28rem];
@@ -58,11 +70,43 @@
   }
 }
 
+.room-banner-carousel{
+  .relative>.overflow-hidden.relative{
+    @apply 2xl:h-[800px] 2xl:py-60 mobile:h-[800px] sm:h-[800px]
+  }
+  .relative>.overflow-hidden.relative img{
+    @apply block  mobile:h-full mobile:object-cover tablet:object-cover
+  }
+  .relative .flex.absolute.bottom-5.z-30.space-x-3{
+    @apply z-50
+  }
+}
+
+.room-banner-text{
+  @apply z-50 absolute inset-0 flex lg:flex-row lg:items-center lg:justify-center mobile:flex-col mobile:justify-center tablet:justify-center mobile:items-center tablet:items-center
+}
+
+.room-banner-text-left{
+  @apply lg:w-1/4 lg:mr-20 lg:text-left lg:items-start tablet:text-center tablet:flex tablet:flex-col tablet:items-center mobile:text-center mobile:flex mobile:flex-col mobile:items-center
+}
+
 .show-datepicker{
   @apply bg-white
 }
 
 //更改月曆套件樣式
+
+.vue-datepicker.mobile{
+  .flex{
+    @apply flex-col
+  }
+  .relative.w-full .flex.justify-between.items-center{
+    @apply flex-row
+  }
+  .grid.grid-cols-7.py-2{
+    @apply hidden
+  }
+}
 
 .vue-datepicker {
   .bg-white.rounded-lg.shadow-sm{
@@ -80,9 +124,16 @@
     @apply rounded-full hover:rounded-full bg-black;
   }
 
+  .flex.flex-1,.vtd-datepicker-date {
+    @apply flex-row-reverse font-serif sm:font-bold;
+  }
+  .flex.flex-1 .leading-relaxed.rounded-md.bg-white{
+    @apply font-serif sm:font-bold;
+  }
+
   .relative.w-full.mb-3 .flex.justify-between.items-center {
     .flex-shrink-0:nth-last-of-type(1) .inline-flex button {
-      @apply hidden;
+      // @apply hidden;
     }
     .flex.flex-1 {
       @apply flex-row-reverse;
@@ -98,7 +149,7 @@
 
   .relative.w-full.mt-3 .flex.justify-between.items-center:first-of-type {
     .flex-shrink-0:first-of-type .inline-flex button {
-      @apply hidden;
+      // @apply hidden;
     }
   }
   >.flex div{
@@ -118,5 +169,5 @@
 }
 
 .overlay{
-  @apply bg-black fixed inset-0 bg-black bg-opacity-50 z-0
+  @apply fixed inset-0 bg-black bg-opacity-50 z-0
 }

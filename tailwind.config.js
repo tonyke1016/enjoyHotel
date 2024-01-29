@@ -89,7 +89,7 @@ export default {
         }
       ],
       'body-2': [
-        '0.75rem',
+        '14px',
         {
           lineHeight: 1.5,
           letterSpacing: '0.02em',
@@ -164,7 +164,8 @@ export default {
         '773px':'773px'
       },
       height:{
-        '28rem':'28rem'
+        '28rem':'28rem',
+        '800px':'800px'
       },
       padding: {
         '120px': '120px',
@@ -172,6 +173,10 @@ export default {
       },
       margin: {
         '72px': '72px',
+      },
+      bottom: {
+        '370px': '370px',
+        '90px':'90px'
       }
     }
   },
