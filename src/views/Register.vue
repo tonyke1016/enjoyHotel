@@ -199,8 +199,8 @@ const registerSubmit = async () => {
     alert('您已註冊成功！！')
     router.push('/login')
   } catch (error) {
-    // console.log(error)
-    alert(`${error}`)
+    console.log(error)
+    // alert(`${error}`)
   }
 }
 
