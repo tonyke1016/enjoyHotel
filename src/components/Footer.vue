@@ -1,10 +1,10 @@
 <template>
   <div class="bg-black text-white">
-    <div class="container flex justify-between test">
+    <div class="container flex justify-between footer_inner">
       <div class="footer_leftSide">
-        <img src="../assets/login/logo.png" alt="logo" />
-        <div class="mt-10">
-          <img src="../assets/footer/bi_line.png" alt="" />
+        <img src="../assets/footer/logoWhite.svg" alt="logo" />
+        <div class="mt-10 flex">
+          <img class="mr-4" src="../assets/footer/bi_line.png" alt="" />
           <img src="../assets/footer/Group.png" alt="" />
         </div>
       </div>
@@ -42,7 +42,7 @@
 img {
   max-height: 100%;
 }
-.test{
+.footer_inner{
     max-width: 960px;
 }
 </style>

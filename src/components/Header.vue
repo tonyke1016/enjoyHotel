@@ -18,8 +18,5 @@
     .Header {
         max-height: 120px;
         @apply px-20 py-6;
-        .HeaderImage {
-
-        }
     }
 </style>
