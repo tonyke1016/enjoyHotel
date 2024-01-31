@@ -85,7 +85,7 @@ export default {
 
   async POST<T = any>(url: string, data?: object, config?: object): Promise<T | ErrorResponse> {
     try {
-      const res: AxiosResponse<T> = await axios.post<T>(url, data, config);
+      const res: AxiosResponse<T> = await axiosIns.post<T>(url, data, config);
       return res.data;
     } catch (error: any) {
 
