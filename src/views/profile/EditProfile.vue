@@ -105,8 +105,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import api from '../../stores/api'
-import ZipCodeMap from '../../utils/zipcodes'
+import api from '@/stores/api'
+import ZipCodeMap from '@/utils/zipcodes'
 
 // 個人資料
 const data = ref(null)
@@ -178,16 +178,11 @@ const chooseCity = ref({
 const selectCounty = () => {
   chooseCity.value = cityList.value[0]
 }
-
-onMounted(async () => {
-  try {
-    if (localStorage.getItem('token')) {
-      data.value = await api.GET('/user')
-      console.log('data', data.value)
-    }
-  } catch (error) {
-    console.error(error)
-  }
+const loadData = async () => {
+  data.value = await api.GET('/user')
+}
+onMounted(() => {
+  loadData()
 })
 </script>
 
