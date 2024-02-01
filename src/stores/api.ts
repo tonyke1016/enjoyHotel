@@ -53,6 +53,11 @@ axiosIns.interceptors.response.use(response => {
   }
 })
 
+interface ErrorResponse {
+  isError: true;
+  message: string;
+}
+
 export default {
   async GET<T = any>(url: string, params?: object): Promise<T> {
     try {
@@ -78,14 +83,16 @@ export default {
     }
   },
 
-  async POST<T = any>(url: string, data?: object, config?: object): Promise<T> {
+  async POST<T = any>(url: string, data?: object, config?: object): Promise<T | ErrorResponse> {
     try {
-      const res: AxiosResponse<T> = await axiosIns.post<T>(url, data, config)
+      const res: AxiosResponse<T> = await axiosIns.post<T>(url, data, config);
+      return res.data;
+    } catch (error: any) {
 
-      return res.data
-    }
-    catch (error: any) {
-      return Promise.reject(error.message)
+      return {
+        isError: true,
+        message: error.response?.data?.message || error.message,
+      };
     }
   },
 
