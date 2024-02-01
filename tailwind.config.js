@@ -89,7 +89,7 @@ export default {
         }
       ],
       'body-2': [
-        '0.75rem',
+        '14px',
         {
           lineHeight: 1.5,
           letterSpacing: '0.02em',
@@ -110,7 +110,10 @@ export default {
       md: '720px',
       lg: '960px',
       xl: '1320px',
-      '2xl': '1920px'
+      '2xl': '1920px',
+      'mobile': '375px',
+      'tablet': '640px',
+      'desktop': '1920px'
     },
     container: {
       center: true,
@@ -160,9 +163,20 @@ export default {
       width:{
         '773px':'773px'
       },
+      height:{
+        '28rem':'28rem',
+        '800px':'800px'
+      },
       padding: {
         '120px': '120px',
         '168px': '168px',
+      },
+      margin: {
+        '72px': '72px',
+      },
+      bottom: {
+        '370px': '370px',
+        '90px':'90px'
       }
     }
   },
