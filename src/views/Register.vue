@@ -237,10 +237,12 @@ const goLogin = () => {
   .registerWrapper {
     @apply flex;
     .loginPicture {
-      @apply w-3/6;
+      @apply hidden tablet:w-3/6 tablet:block;
       .background {
-        height: 100%;
-        background-image: url('../assets/login/register.png');
+        @media (min-width: 640px) {
+          height: 100%;
+          background-image: url('../assets/login/register.png');
+        }
         @apply bg-cover bg-center;
       }
     }
@@ -249,9 +251,9 @@ const goLogin = () => {
         height: calc(100vh - 128px);
       }
       background-image: url('../assets/login/line3.png');
-      @apply w-3/6 bg-black bg-no-repeat bg-top bg-contain;
+      @apply w-full tablet:w-3/6 bg-black bg-no-repeat bg-top bg-contain;
       .inputArea {
-        @apply w-[416px] mx-auto mt-[30px];
+        @apply w-[90%] tablet:w-[80%] mx-auto mt-[30px];
         h2 {
           @apply text-[16px] text-[#BF9D7D];
         }
@@ -265,6 +267,7 @@ const goLogin = () => {
               @apply border border-solid border-white rounded-full w-[24.5px] bg-[#BF9D7D] text-white text-center mx-auto mb-[5px];
             }
             h2 {
+              @apply text-[12px] tablet:text-[16px];
             }
           }
           .line {
@@ -278,6 +281,7 @@ const goLogin = () => {
               }
             }
             h2 {
+              @apply text-[12px] tablet:text-[16px];
             }
           }
         }
@@ -380,6 +384,7 @@ const goLogin = () => {
             @apply h-[56px] text-[#ffffff] bg-[#BF9D7D] rounded-[8px] text-center leading-[56px] mb-[20px];
           }
           .login {
+            @apply mb-[20px];
             .hasMember {
               @apply text-[#ffffff];
             }

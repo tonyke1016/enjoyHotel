@@ -85,7 +85,7 @@ const login = async () => {
   .loginWrapper {
     @apply flex;
     .loginPicture {
-      @apply w-3/6;
+      @apply hidden tablet:w-3/6 tablet:block;
       .background {
         height: calc(100vh - 128px);
         background-image: url('../assets/login/register.png');
@@ -93,10 +93,14 @@ const login = async () => {
       }
     }
     .loginArea {
-      background-image: url('../assets/login/line3.png');
-      @apply w-3/6 bg-black bg-no-repeat bg-top bg-contain;
+      background-image: none;
+      height: calc(100vh - 128px);
+      @media (min-width: 640px) {
+        background-image: url('../assets/login/line3.png');
+      }
+      @apply w-full  tablet:w-3/6 bg-black bg-no-repeat bg-top bg-contain;
       .inputArea {
-        @apply w-[416px] h-[522px] mx-auto mt-[60px];
+        @apply w-[80%] tablet:w-[416px] tablet:h-[522px] mx-auto mt-[60px];
         h2 {
           @apply text-[16px] text-[#BF9D7D];
         }
